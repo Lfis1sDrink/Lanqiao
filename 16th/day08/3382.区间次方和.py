@@ -4,6 +4,8 @@
 每个查询包含三个整数 `l`、`r`、`k`，表示询问区间 `[l, r]` 之间所有元素的 `k` 次方和。
 请对每个查询输出一个答案，答案对 `10^9 + 7` 取模。
 """
+# itertools 是 Python 的一个模块，提供了用于高效循环和组合操作的函数。
+# 这个名字来源于 "iterator"（迭代器）和 "tools"（工具）的组合，表示它是一个处理迭代器的工具集。
 from itertools import accumulate
 import sys
 
