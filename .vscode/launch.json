@@ -9,7 +9,7 @@
             "type": "debugpy",
             "request": "launch",
             "console": "integratedTerminal",
-            "args": ["<", "${fileDirname}/3904.in"],
+            "args": ["<", "${fileDirname}\\3514.in"],
             "program": "${file}",
             // "args": [],
             "cwd": "${fileDirname}"
