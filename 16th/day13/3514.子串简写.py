@@ -36,10 +36,12 @@ for char in s:
     l.append(char_count[char])
 
 # print(l)
-
+# k -= 1
 for i in range(n):
-  if s[i] == c1 and i+k < n:
-    firstc2idx = i+k+s[i+k:].find(c2)-2 #i+k个位置后c2第一次出现的位置
+  if s[i] == c1 and i+k <= n:
+    firstc2idx = i+k-1+s[i+k-1:].find(c2) #i+k个位置后c2第一次出现的位置
     lastc2idx = s.rfind(c2) #找到最后一个c2出现的位置
+    # print(f"从{firstc2idx}到{lastc2idx}的位置")
     ans = ans + (l[lastc2idx] - l[firstc2idx] + 1)
+    # print(f"c2共有{l[lastc2idx]}-{l[firstc2idx]} +1 = {l[lastc2idx] - l[firstc2idx] + 1}次")
 print(ans)
