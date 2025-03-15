@@ -35,11 +35,64 @@ for char in s:
     # 将当前字符的出现次数添加到列表 l 中
     l.append(char_count[char])
 
-# print(l)
 
+# 边界条件错误，答案一直错误
+# for i in range(n):
+#   if s[i] == c1 and i+k <= n:
+#     firstc2idx = i+k-1+s[i+k-1:].find(c2) 
+#     lastc2idx = s.rfind(c2) 
+#     ans = ans + (l[lastc2idx] - l[firstc2idx] + 1)
+# print(ans)
+
+
+
+# # 最后还是dpsk深度思考了，真牛
+# k = int(input())
+# s, c1, c2 = input().split()
+# n = len(s)
+# ans = 0
+
+# # Preprocess the cumulative count for each character
+# char_count = {}
+# l = []
+# for char in s:
+#     if char not in char_count:
+#         char_count[char] = 0
+#     char_count[char] += 1
+#     l.append(char_count[char])
+
+# for i in range(n):
+#     if s[i] == c1:
+#         start = i + k - 1
+#         if start >= n:
+#             continue  # 子串长度不够k
+#         # 查找start之后第一个c2的位置
+#         first_pos = s[start:].find(c2)
+#         if first_pos == -1:
+#             continue
+#         firstc2idx = start + first_pos
+#         # 查找在start之后最后一个c2的位置
+#         lastc2idx = s.rfind(c2, start)
+#         if lastc2idx < start:
+#             continue
+#         # 确保这两个位置的字符确实是c2
+#         if s[firstc2idx] != c2 or s[lastc2idx] != c2:
+#             continue
+#         # 计算数量
+#         ans += l[lastc2idx] - l[firstc2idx] + 1
+
+# print(ans)
+
+
+# 尝试修正我的错误
 for i in range(n):
-  if s[i] == c1 and i+k < n:
-    firstc2idx = i+k+s[i+k:].find(c2)-2 #i+k个位置后c2第一次出现的位置
-    lastc2idx = s.rfind(c2) #找到最后一个c2出现的位置
+  if s[i] == c1 and i+k <= n:
+    firstc2idx = i+k-1+s[i+k-1:].find(c2) 
+    lastc2idx = s.rfind(c2) 
+    # 主要的问题就出在了没有加上下面这两行，因为没有考虑到c2可能会在c1之前找到的情况
+    # 这会导致子串长度不满足却也计数的错误
+    if lastc2idx < i+k-1:
+        continue
     ans = ans + (l[lastc2idx] - l[firstc2idx] + 1)
+
 print(ans)
