@@ -43,16 +43,16 @@ n = int(input())
 
 a = list(map(int, input().split()))
 
-baseL = [[] for _ in range(18)]
+baseL = [[] for _ in range(19)]
 
 for i in range(n):
   #对每个数字判断它的封闭图形个数，之后分别放到对应的列表里排序
   a_str = str(a[i])
   a_count = a_str.count('0') + a_str.count('4') + a_str.count('6') + a_str.count('9') + (a_str.count('8'))*2
-  baseL[a_count-1].append(a[i])
+  baseL[a_count].append(a[i])
 
 
-baseL = [sorted(baseL[i]) for i in range(18)]
+baseL = [sorted(baseL[i]) for i in range(19)]
 res = list(itertools.chain(*baseL))
 
 # for i in range(18):
