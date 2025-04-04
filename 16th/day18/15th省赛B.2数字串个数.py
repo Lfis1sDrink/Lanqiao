@@ -4,14 +4,12 @@ MOD = 10**9 + 7
 
 # every bit can be distrubuted by 1-8 (8 digitls)
 
-ans1 = 9
-for i in range(10000):
-  ans1 = (ans1 * 9)
+ans1 = 9**1000
 
-ans2 = 7
-for i in range(10000):
-  ans2 = (ans2 * 7)
+ans2 = 7**1000
 
-ans = (ans1 - ans2) % MOD
+ans3 = 8**1000
+
+ans = (ans1 - 2*ans3 + ans2) % MOD
 
 print(ans)
