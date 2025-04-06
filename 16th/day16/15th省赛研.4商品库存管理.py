@@ -127,39 +127,76 @@
 #   print(ans)
 
 
-##############################################################
-
+#######################################################
 # 2025年4月4日重新做一遍
+# 依然只通过30%的样例
+
+# 差分数组和前缀和
+
+# n,m = map(int, input().split())
+# opt = []
+
+# for i in range(m):
+#   L,R = map(int, input().split())
+#   opt.append((L,R))
+
+# for i in range(m):
+#   goodsList = [0]*(n+1)
+#   # 输出如果不执行第 i 个操作，则最终库存量为 0 的商品种类数
+#   # 利用差分数组更新库存
+#   for j in range(m):
+#     if j == i:#第i行不执行第i个操作
+#       continue
+#     L = opt[j][0]
+#     R = opt[j][1]
+#     goodsList[L-1] += 1
+#     goodsList[R] -= 1
+#   # 用前缀和还原数组
+#   for j in range(1,len(goodsList)):
+#     goodsList[j] += goodsList[j-1]
+# #   print(goodsList)
+#   # 输出结果
+#   ans = 0
+#   for i in range(n):
+#     if goodsList[i] == 0:
+#       ans += 1
+#   print(ans)
+
+
+
+#######################################################
+# 2025年4月6日重新做一遍
+# 100%通过了
 
 n,m = map(int, input().split())
 opt = []
+goodsList = [0]*(n+1)
 
+# 存储每个操作，同时对goodsList应用差分数组
 for i in range(m):
   L,R = map(int, input().split())
   opt.append((L,R))
-
-for i in range(m):
-  goodsList = [0]*(n+1)
-  # 输出如果不执行第 i 个操作，则最终库存量为 0 的商品种类数
-  # 利用差分数组更新库存
-  for j in range(m):
-    if j == i:#第i行不执行第i个操作
-      continue
-    L = opt[j][0]
-    R = opt[j][1]
-    goodsList[L-1] += 1
+  goodsList[L-1] += 1
+  if R <= n+1:
     goodsList[R] -= 1
-  # 用前缀和还原数组
-  for j in range(1,len(goodsList)):
-    goodsList[j] += goodsList[j-1]
-#   print(goodsList)
-  # 输出结果
-  ans = 0
-  for i in range(n):
+
+# 用前缀和得出结果数组
+for i in range(1,n+1):
+  goodsList[i] += goodsList[i-1]
+
+# print(goodsList)
+total0 = 0
+for i in range(len(goodsList)-1):
+  if goodsList[i] == 0:
+    total0 += 1
+
+for L,R in opt:
+  cnt_1 = 0
+  cnt_0 = 0
+  for i in range(L-1,R):
+    if goodsList[i] == 1:
+      cnt_1 += 1
     if goodsList[i] == 0:
-      ans += 1
-  print(ans)
+      cnt_0 += 1
+  print(total0 - cnt_0 + cnt_1)
   
-
-
-
